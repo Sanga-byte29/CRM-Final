@@ -130,7 +130,16 @@ function DashboardNavbar({ absolute, light, isMini }) {
     <AppBar
       position={absolute ? "absolute" : navbarType}
       color="inherit"
-      sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
+      sx={(theme) => ({
+        ...navbar(theme, { transparentNavbar, absolute, light, darkMode }),
+        zIndex: theme.zIndex.drawer + 1, // Ensure AppBar is above the Sidenav
+        marginLeft: miniSidenav ? "64px" : "100px", // Adjust left margin based on sidenav width
+        width: miniSidenav ? "calc(100% - 140px)" : "calc(100% - 100px)", // Adjust width
+        transition: theme.transitions.create(["margin", "width"], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+      })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>

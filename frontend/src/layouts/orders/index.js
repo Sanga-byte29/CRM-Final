@@ -408,6 +408,7 @@ function Tables() {
                   onClick={handleModalOpen}
                 >
                   Add Customer
+                  <ToastContainer />
                 </Button>
                 <CustomerModal open={modalOpen} onClose={handleModalClose} />
               </Grid>
